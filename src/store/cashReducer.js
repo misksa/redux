@@ -18,6 +18,8 @@ export const cashReducer = (state = defaultState, action) => {
 	}
 }
 
+// Тут используем стрелочную функцию для возврата объектной строки, т.е. мы передаем в функцию payload а из функии возвращаем объект
+// {type: ADD_CASH, payload: payload}
 export const addCashAction = (payload) => ({type: ADD_CASH, payload})
 
 export const getCashAction = (payload) => ({type: GET_CASH, payload})

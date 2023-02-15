@@ -2,6 +2,7 @@ import './App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {addCustomerAction, removeCustomerAction} from "./store/customerReducer";
 import {addCashAction, getCashAction} from "./store/cashReducer";
+import {fetchCustomers} from "./asyncActions/customers";
 
 function App() {
 
@@ -37,22 +38,17 @@ function App() {
   return (
     <div className="App">
         <div>
-            <button
-                onClick={() => addCash(Number(prompt()))}
-            >
+            <button onClick={() => addCash(Number(prompt()))}>
                 Пополнить счет
             </button>
-            <button
-                onClick={() => getCash(Number(prompt()))}
-                style={{marginLeft: "15px"}}
-            >
+            <button onClick={() => getCash(Number(prompt()))} style={{marginLeft: "15px"}} >
                 Снять со счета
             </button>
-            <button
-                onClick={() => addCustomer(prompt())}
-                style={{marginLeft: "15px"}}
-            >
+            <button onClick={() => addCustomer(prompt())} style={{marginLeft: "15px"}}>
                 Добаваить клиента
+            </button>
+            <button onClick={() => dispatch(fetchCustomers())} style={{marginLeft: "15px"}}>
+                Получить пользователей с сервера
             </button>
         </div>
         <div style={{marginTop: "15px", fontSize: '2em'}}>
@@ -64,6 +60,7 @@ function App() {
                     Клиенты:
                     {customers.map(customer =>
                         <div
+                            key={customer.id}
                             onClick={() => removeCustomer(customer)}
                             style={{cursor: "pointer", border: "1px solid black", borderRadius: '4px', marginTop: '10px'}}
 
